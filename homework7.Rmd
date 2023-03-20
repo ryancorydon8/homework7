@@ -1,0 +1,21 @@
+---
+title: "Homework 7"
+author: "Ryan Corydon and Emma Podlich"
+date: "2023-03-20"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r}
+data(happy, package="productplots")
+head(happy)
+```
+```{r}
+HAPPY <- readRDS("data/HAPPY.rds")
+```
+
