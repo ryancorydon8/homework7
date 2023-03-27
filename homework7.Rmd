@@ -40,18 +40,38 @@ HAPPY[HAPPY == "IAP" | HAPPY == "DK" | HAPPY == "NA"] <- NA
 ```{r}
 str(HAPPY)
 HAPPY$HAPPY <- as.factor(HAPPY$HAPPY)
+HAPPY %>% ggplot(aes(x = HAPPY)) + geom_bar()
+
 HAPPY$YEAR <- as.numeric(HAPPY$YEAR)
+HAPPY %>% ggplot(aes(x = YEAR)) + geom_histogram(binwidth=1)
+
 HAPPY$SEX <- as.factor(HAPPY$SEX)
+HAPPY %>% ggplot(aes(x = SEX)) + geom_bar()
+
 HAPPY$MARITAL <- as.factor(HAPPY$MARITAL)
+HAPPY %>% ggplot(aes(x = MARITAL)) + geom_bar()
+
 HAPPY$DEGREE <- as.factor(HAPPY$DEGREE)
+HAPPY %>% ggplot(aes(x = DEGREE)) + geom_bar()
+
 HAPPY$FINRELA <- as.factor(HAPPY$FINRELA)
+HAPPY %>% ggplot(aes(x = FINRELA)) + geom_bar()
+
 HAPPY$HEALTH <- as.factor(HAPPY$HEALTH)
+HAPPY %>% ggplot(aes(x = HEALTH)) + geom_bar()
+
 HAPPY$WTSSALL <- as.numeric(HAPPY$WTSSALL)
+HAPPY %>% ggplot(aes(x = WTSSALL)) + geom_bar()
+
 HAPPY$PARTYID <- as.factor(HAPPY$PARTYID)
+HAPPY %>% ggplot(aes(x = PARTYID)) + geom_bar()
+
 HAPPY$POLVIEWS <- as.factor(HAPPY$POLVIEWS)
+HAPPY %>% ggplot(aes(x = POLVIEWS)) + geom_bar()
 
 HAPPY[HAPPY == "89 OR OLDER"] <- "89"
 HAPPY$AGE <- as.numeric(HAPPY$AGE)
+HAPPY %>% ggplot(aes(x = AGE)) + geom_histogram(binwidth=1)
 ```
 
 
@@ -87,7 +107,7 @@ HAPPY %>% filter(YEAR > '2012') %>% filter(MARITAL == 'MARRIED' | MARITAL == 'DI
   facet_wrap(~HAPPY) 
 ```
 
-Looking at the data I can see in the through the years 2013 and 2016 I can clearly see that people that are married are much more happy than those that aren't. 
+Looking at the data I can see in the through the years 2013 and 2016 I can clearly see that people that are married are much more happy than those that aren't. I can assume that this will be the same for all years as well but wanted to do a specific year range for fun. So if you want to be more happier in life I assume you should try and get married.
 
 ### Emma
 
