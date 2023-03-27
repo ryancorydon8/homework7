@@ -21,11 +21,12 @@ library(ggplot2)
 #data(happy, package="productplots")
 #head(happy)
 ```
+
 ```{r}
 HAPPY <- readRDS("data/HAPPY.rds")
 ```
 
-
+## Part 1 (cleaning)
 
 1. Data cleaning: the values “IAP”, “DK” and “NA” all encode missing values. Replace all of these instances by the value NA.
 
@@ -37,7 +38,19 @@ HAPPY[HAPPY == "IAP" | HAPPY == "DK" | HAPPY == "NA"] <- NA
 2. Check the type of the variable and cast into the right type (factor variable for categorical variables). For age, change “89 OR OLDER” to 89 and assume the variable should be numeric.
 
 ```{r}
-HAPPY[HAPPY=="89 OR OLDER"] <- "89"
+str(HAPPY)
+HAPPY$HAPPY <- as.factor(HAPPY$HAPPY)
+HAPPY$YEAR <- as.numeric(HAPPY$YEAR)
+HAPPY$SEX <- as.factor(HAPPY$SEX)
+HAPPY$MARITAL <- as.factor(HAPPY$MARITAL)
+HAPPY$DEGREE <- as.factor(HAPPY$DEGREE)
+HAPPY$FINRELA <- as.factor(HAPPY$FINRELA)
+HAPPY$HEALTH <- as.factor(HAPPY$HEALTH)
+HAPPY$WTSSALL <- as.numeric(HAPPY$WTSSALL)
+HAPPY$PARTYID <- as.factor(HAPPY$PARTYID)
+HAPPY$POLVIEWS <- as.factor(HAPPY$POLVIEWS)
+
+HAPPY[HAPPY == "89 OR OLDER"] <- "89"
 HAPPY$AGE <- as.numeric(HAPPY$AGE)
 ```
 
@@ -45,13 +58,21 @@ HAPPY$AGE <- as.numeric(HAPPY$AGE)
 
 3. Bring all levels of factors into a sensible order. For marital you could e.g. order the levels according to average age.
 
+```{r}
+
+# HAPPY <- HAPPY %>% factor(MARITAL,
+ # levels(reorder(MARITAL, AGE, mean, na.rm = TRUE))) 
 
 
 
 
-Part 2 Individual Exploration
+```
 
-Ryan
+
+
+## Part 2 Individual Exploration
+
+### Ryan
 
 The relationship that I want to investigate is the happiness from the years 2008-2016 of people that are married and not married.
 
@@ -65,6 +86,17 @@ HAPPY %>% filter(YEAR > '2012') %>% filter(MARITAL == 'MARRIED' | MARITAL == 'DI
   geom_bar(aes(fill = MARITAL), position = "dodge") + 
   facet_wrap(~HAPPY) 
 ```
+
 Looking at the data I can see in the through the years 2013 and 2016 I can clearly see that people that are married are much more happy than those that aren't. 
 
-Emma
+### Emma
+
+The relationship that I would like to investigate is how happy people are based on their different sexes and marital status.
+
+```{r}
+ggplot(HAPPY, aes(x = SEX))+
+  geom_bar(aes(fill = MARITAL), position = "dodge") + 
+  facet_wrap(~HAPPY)
+```
+
+According to this plot, the trends in both happiness type and marital status is the same for males and females. There are few males/females in the not too happy category and all martial status' have about the same amount of males/females in this category. There are a lot of males/females in the pretty happy category and most common marital status would be married people are in this category. The least common would be separated in this category. There are a lot of males/females in the very happy category but a little bit less than the previous category (pretty happy). The most common marital status would also be married and the least common would also be separated in this category.
