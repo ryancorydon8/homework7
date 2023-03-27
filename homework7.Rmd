@@ -13,12 +13,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r}
 library(dplyr)
 library(tidyr)
+library(ggplot2)
 ```
 
 
 ```{r}
-data(happy, package="productplots")
-head(happy)
+#data(happy, package="productplots")
+#head(happy)
 ```
 ```{r}
 HAPPY <- readRDS("data/HAPPY.rds")
@@ -48,16 +49,22 @@ HAPPY$AGE <- as.numeric(HAPPY$AGE)
 
 
 
-
 Part 2 Individual Exploration
 
 Ryan
 
-The relationship that I want to investigate is 
+The relationship that I want to investigate is the happiness from the years 2008-2016 of people that are married and not married.
 
+```{r}
+HAPPY1 = 
+HAPPY %>% filter(YEAR > '2012') %>% filter(MARITAL == 'MARRIED' | MARITAL == 'DIVORCED') 
+```
 
-
-
-
+```{r}
+ ggplot(HAPPY1, aes(x = YEAR))+
+  geom_bar(aes(fill = MARITAL), position = "dodge") + 
+  facet_wrap(~HAPPY) 
+```
+Looking at the data I can see in the through the years 2013 and 2016 I can clearly see that people that are married are much more happy than those that aren't. 
 
 Emma
